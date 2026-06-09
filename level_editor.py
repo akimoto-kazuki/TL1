@@ -52,13 +52,17 @@ def register():
     #Blenderにクラスを登録
     for cls in classes:
         bpy.utils.register_class(cls)
+    #メニュー項目(Manual)をトップバーに追加
+    bpy.types.TOPBAR_MT_editor_menus.append(draw_menu_manual)
     #メニューに項目を追加
     bpy.types.TOPBAR_MT_editor_menus.append(TOPBAR_MT_my_menu.submenu)
     print("レベルエディタが有効化されました。")
     
 #アドオン無効化時コールバック
 def unregister():
-    #メニューに項目を追加
+    #メニュー項目(Manual)をトップバーから削除
+    bpy.types.TOPBAR_MT_editor_menus.remove(draw_menu_manual)
+    #メニューに項目を削除
     bpy.types.TOPBAR_MT_editor_menus.remove(TOPBAR_MT_my_menu.submenu)
     #Blenderにクラスを削除
     for cls in classes:
