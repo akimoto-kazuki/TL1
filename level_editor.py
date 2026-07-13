@@ -96,13 +96,13 @@ class MYADDON_OT_export_scene(bpy.types.Operator,bpy_extras.io_utils.ExportHelpe
     def parse_scene_recursive(self, file, object, level):
         """シーン解析用再帰関数"""
 
-        input = ''
+        indent = ''
         for i in range(level):
             indent += "\t"
 
 
         # オブジェクト名書き込み
-        self.write_and_print(file, input + object.type + " - " + object.name)
+        self.write_and_print(file, indent + object.type + " - " + object.name)
         trans, rot, scale = object.matrix_local.decompose()
         #回転を Quternion から Euler (3軸での回転角)に変換
         rot = rot.to_euler()
@@ -111,9 +111,9 @@ class MYADDON_OT_export_scene(bpy.types.Operator,bpy_extras.io_utils.ExportHelpe
         rot.y = math.degrees(rot.y)
         rot.z = math.degrees(rot.z)
         #トランスフォーム情報を表示
-        self.write_and_print(file, input +  "Trans(%f,%f,%f)" % (trans.x,trans.y,trans.z))
-        self.write_and_print(file, input + "Rot(%f,%f,%f)" % (rot.x,rot.y,rot.z))
-        self.write_and_print(file, input + "Scale(%f,%f,%f)" % (scale.x,scale.y,scale.z))
+        self.write_and_print(file, indent +  "Trans(%f,%f,%f)" % (trans.x,trans.y,trans.z))
+        self.write_and_print(file, indent + "Rot(%f,%f,%f)" % (rot.x,rot.y,rot.z))
+        self.write_and_print(file, indent + "Scale(%f,%f,%f)" % (scale.x,scale.y,scale.z))
         self.write_and_print(file, '')
 
         for child in object.children:
