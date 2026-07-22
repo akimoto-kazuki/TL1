@@ -45,7 +45,7 @@ class MYADDON_OT_create_ico_sphere(bpy.types.Operator):
         bpy.ops.mesh.primitive_ico_sphere_add()
         print("ICO球を生成しました")
 
-        return {'FINISHFD'}
+        return {'FINISHED'}
     
 #オペレータ シーン出力
 class MYADDON_OT_export_scene(bpy.types.Operator,bpy_extras.io_utils.ExportHelper):
@@ -214,13 +214,13 @@ class DrawCollider:
 
         offsets = [
             [-0.5,-0.5,-0.5], #左下前
-            [-0.5,-0.5,-0.5], #右下前
-            [-0.5,-0.5,-0.5], #左上前
-            [-0.5,-0.5,-0.5], #右上前
-            [-0.5,-0.5,-0.5], #左下奥
-            [-0.5,-0.5,-0.5], #右下奥
-            [-0.5,-0.5,-0.5], #左上奥
-            [-0.5,-0.5,-0.5]  #右上奥
+            [+0.5,-0.5,-0.5], #右下前
+            [-0.5,+0.5,-0.5], #左上前
+            [+0.5,+0.5,-0.5], #右上前
+            [-0.5,-0.5,+0.5], #左下奥
+            [+0.5,-0.5,+0.5], #右下奥
+            [-0.5,+0.5,+0.5], #左上奥
+            [+0.5,+0.5,+0.5]  #右上奥
             ] 
         
         size = [2,2,2]
